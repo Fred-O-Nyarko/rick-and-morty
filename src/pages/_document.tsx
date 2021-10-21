@@ -1,5 +1,5 @@
-import React from "react";
-import Document, { Head, Main, NextScript, Html } from "next/document";
+import React from 'react';
+import Document, { Head, Main, NextScript, Html } from 'next/document';
 // import { ServerStyleSheets } from "@material-ui/core/styles";
 // import theme from "@/theming/theme";
 
@@ -10,17 +10,18 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {/* PWA primary color */}
-          {/* This is the color of the AppBar */}
-          {/* <meta name="theme-color" content={theme.palette.grey[900]} /> */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          /> */}
+          <link
+            href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap"
             rel="stylesheet"
           />
         </Head>

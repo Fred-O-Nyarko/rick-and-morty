@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 // Alias Image as NextImage to prevent component name clash
-import NextImage, { ImageProps } from "next/image";
+import NextImage, { ImageProps } from 'next/image';
 
 type CustomImageProps = ImageProps;
 
