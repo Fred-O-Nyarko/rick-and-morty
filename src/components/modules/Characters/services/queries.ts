@@ -48,6 +48,9 @@ export const GET_CHARACTER = gql`
         name
         type
         dimension
+        residents {
+          id
+        }
       }
       location {
         id

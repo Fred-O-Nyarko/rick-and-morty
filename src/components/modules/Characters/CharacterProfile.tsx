@@ -90,9 +90,18 @@ function CharacterProfile() {
                   {' '}
                   ORIGIN
                 </span>{' '}
-                <br />{' '}
+                <br /> Name -
                 <span className="text-green-400 font-bold">
                   {characterDetails?.origin.name}
+                </span>{' '}
+                <br />
+                Dimension -
+                <span className="text-green-400 font-bold">
+                  {characterDetails?.origin.dimension}
+                </span>{' '}
+                <br /> No. of residents -
+                <span className="text-green-400 font-bold">
+                  {!loading && characterDetails?.origin?.residents.length}
                 </span>
               </div>
               <div className="mb-3">
@@ -100,7 +109,7 @@ function CharacterProfile() {
                   {' '}
                   LOCATION{' '}
                 </span>
-                <br />{' '}
+                <br /> Name -
                 <span className="text-green-400 font-bold">
                   {characterDetails?.location.name}
                 </span>
@@ -111,7 +120,7 @@ function CharacterProfile() {
 
         <div className="my-4 px-2 w-full overflow-hidden lg:w-1/2">
           <div className="backdrop backdrop-filter backdrop-blur-sm bg-white bg-opacity-10 rounded text-white border border-white shadow-lg p-3">
-            <div className="text-left mb-3">Episodes</div>
+            <div className="text-left mb-3 font-bold">Episodes featured 🎥</div>
             {characterDetails?.episode?.map((ep, idx) =>
               ep && (expand || idx < maxEpisodesToRender) ? (
                 <>

@@ -9,13 +9,7 @@ import {
 } from '../../../generated/graphql';
 import { Loading, Image } from '../../elements';
 import { routes } from '../../../routing/routes';
-import {
-  HeartIcon,
-  PlusCircleIcon,
-  PlusIcon,
-  SearchIcon,
-  TrashIcon,
-} from '@heroicons/react/solid';
+import { SearchIcon } from '@heroicons/react/solid';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { addCharacter, removeCharacter } from '../../../redux/characterSlice';
@@ -24,10 +18,14 @@ import { isInList } from './utils';
 const CharactersList = () => {
   const router = useRouter();
 
+  const [searchData, setSearchData] = React.useState('');
   const { data, loading, error, fetchMore, networkStatus } = useQuery<
     { characters: Characters },
     QueryCharactersArgs
-  >(GET_CHARACTERS, { variables: {}, notifyOnNetworkStatusChange: true });
+  >(GET_CHARACTERS, {
+    variables: { filter: { name: searchData } },
+    notifyOnNetworkStatusChange: true,
+  });
 
   const next = data?.characters?.info?.next;
   const hasNextPage = !!next;
@@ -35,10 +33,9 @@ const CharactersList = () => {
   const characters = !isSetVariables ? data?.characters : undefined;
 
   const dispatch = useAppDispatch();
-  const favoriteCharactersList = useAppSelector(
+  const favoriteCharacters = useAppSelector(
     (state) => state.favoriteCharacters.favoriteCharacters,
   );
-  const [clicked, setClicked] = React.useState<boolean>(false);
 
   const handleLoadMore = React.useCallback(
     () =>
@@ -48,16 +45,18 @@ const CharactersList = () => {
     [fetchMore, next],
   );
 
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchData(e.target.value);
+  }
+
   function handleClick(e: any, character: Character) {
     e?.stopPropagation();
-    setClicked(!clicked);
 
-    if (isInList(favoriteCharactersList, character)) {
+    if (isInList(favoriteCharacters, character)) {
       return dispatch(removeCharacter(character));
     }
     dispatch(addCharacter(character));
   }
-  console.log(favoriteCharactersList);
 
   return (
     <div className="container mx-auto w-full md:w-2/3 my-5 ">
@@ -70,7 +69,8 @@ const CharactersList = () => {
         <input
           className="w-full p-2 bg-transparent outline-none"
           type="text"
-          placeholder="search characters..."
+          placeholder="enter character name..."
+          onChange={handleSearch}
         />
       </div>
 
@@ -110,11 +110,7 @@ const CharactersList = () => {
                     onClick={(e) => handleClick(e, character)}
                     className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 bg-transparent transition-colors duration-150 rounded focus:shadow-outline z-10"
                   >
-                    {isInList(favoriteCharactersList, character) ? (
-                      <>🗑</>
-                    ) : (
-                      <>❤️</>
-                    )}
+                    {isInList(favoriteCharacters, character) ? <>🗑</> : <>❤️</>}
                   </button>
                 </div>
               </div>

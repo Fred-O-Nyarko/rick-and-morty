@@ -1,7 +1,19 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import characterSlice from './characterSlice';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist';
 
 const persistConfig = {
   key: 'root',
@@ -15,6 +27,12 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
