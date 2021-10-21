@@ -35,8 +35,8 @@ const CharactersList = () => {
   const characters = !isSetVariables ? data?.characters : undefined;
 
   const dispatch = useAppDispatch();
-  const preferedCharacterList = useAppSelector(
-    (state) => state.preferedCharacters.preferedCharacters,
+  const favoriteCharactersList = useAppSelector(
+    (state) => state.favoriteCharacters.favoriteCharacters,
   );
   const [clicked, setClicked] = React.useState<boolean>(false);
 
@@ -52,12 +52,12 @@ const CharactersList = () => {
     e?.stopPropagation();
     setClicked(!clicked);
 
-    if (isInList(preferedCharacterList, character)) {
+    if (isInList(favoriteCharactersList, character)) {
       return dispatch(removeCharacter(character));
     }
     dispatch(addCharacter(character));
   }
-  console.log(preferedCharacterList);
+  console.log(favoriteCharactersList);
 
   return (
     <div className="container mx-auto w-full md:w-2/3 my-5 ">
@@ -86,7 +86,10 @@ const CharactersList = () => {
               className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
               key={idx}
               onClick={() =>
-                router.push(`${routes.characters}/${character.id}`)
+                router.push({
+                  pathname: `${routes.characters}/[id]`,
+                  query: { id: character.id },
+                })
               }
             >
               <div className="relative">
@@ -105,12 +108,12 @@ const CharactersList = () => {
                   </p>
                   <button
                     onClick={(e) => handleClick(e, character)}
-                    className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 text-indigo-100 transition-colors duration-150 bg-red-700 rounded focus:shadow-outline hover:bg-red-800 z-10"
+                    className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 bg-transparent transition-colors duration-150 rounded focus:shadow-outline z-10"
                   >
-                    {isInList(preferedCharacterList, character) ? (
-                      <TrashIcon />
+                    {isInList(favoriteCharactersList, character) ? (
+                      <>🗑</>
                     ) : (
-                      <PlusIcon />
+                      <>❤️</>
                     )}
                   </button>
                 </div>

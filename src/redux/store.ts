@@ -9,7 +9,7 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  preferedCharacters: characterSlice,
+  favoriteCharacters: characterSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 

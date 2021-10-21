@@ -3,20 +3,23 @@ import React from 'react';
 import { Character, QueryCharacterArgs } from '../../../generated/graphql';
 import { GET_CHARACTER } from './services/queries';
 import { Image } from '../../elements';
+import { useRouter } from 'next/router';
 
 function CharacterProfile() {
+  const { query } = useRouter();
+
   const { data, error, loading } = useQuery<
     { character: Character },
     QueryCharacterArgs
   >(GET_CHARACTER, {
-    variables: { id: '1' },
+    variables: { id: query.id as string },
     fetchPolicy: 'cache-first',
     notifyOnNetworkStatusChange: true,
   });
 
   const characterDetails = data?.character;
-  const maxEpisodesToRender = 5;
-  const episodeCount = 15;
+  const maxEpisodesToRender = 9;
+  const episodeCount = data?.character.episode.length;
   const [expand, setExpand] = React.useState<boolean>(!maxEpisodesToRender);
   function toggleExpand() {
     setExpand(!expand);
@@ -25,7 +28,7 @@ function CharacterProfile() {
   return (
     <div className="container mx-auto">
       <div className="flex flex-wrap overflow-hidden flex-1 justify-center">
-        <div className="my-4 px-2 w-full overflow-hidden lg:w-1/3">
+        <div className="my-4 px-2 w-full overflow-hidden lg:w-1/3 sticky top-0">
           <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg flex flex-col">
             <div className="image">
               <Image
@@ -41,7 +44,9 @@ function CharacterProfile() {
               <div className="font-bold text-lg">{characterDetails?.name}</div>
               <div className="font-light mb-3 text-sm text-gray-300">
                 {!loading &&
-                  `Present in ${characterDetails?.episode.length} episodes`}
+                  `Present in ${characterDetails?.episode.length} episode${
+                    characterDetails?.episode.length > 1 ? 's' : ''
+                  }`}
               </div>
               <div className="mb-3">
                 <div className="flex gap-4">
@@ -68,7 +73,13 @@ function CharacterProfile() {
                       STATUS{' '}
                     </span>
                     <br />
-                    <span className="text-yellow-500 font-bold">
+                    <span
+                      className={`${
+                        characterDetails?.status === 'Dead'
+                          ? 'text-red-600'
+                          : 'text-green-600'
+                      } font-bold`}
+                    >
                       {characterDetails?.status}
                     </span>
                   </div>

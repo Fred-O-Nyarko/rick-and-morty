@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 interface CharacterState {
-  preferedCharacters: Character[];
+  favoriteCharacters: Character[];
+  favoriteCharactersCount: number;
 }
 
 const initialState: CharacterState = {
-  preferedCharacters: [],
+  favoriteCharacters: [],
+  favoriteCharactersCount: 0,
 };
 
 export const characterSlice = createSlice({
@@ -16,14 +18,14 @@ export const characterSlice = createSlice({
 
   reducers: {
     addCharacter: (state, action) => {
-      state.preferedCharacters = [...state.preferedCharacters, action.payload];
+      state.favoriteCharacters = [...state.favoriteCharacters, action.payload];
     },
 
     removeCharacter: (state, action) => {
-      state.preferedCharacters = [
-        ...state.preferedCharacters.filter(
-          (preferedCharacter) =>
-            preferedCharacter.id !== (action.payload as Character).id,
+      state.favoriteCharacters = [
+        ...state.favoriteCharacters.filter(
+          (favoriteCharacter) =>
+            favoriteCharacter.id !== (action.payload as Character).id,
         ),
       ];
     },
@@ -32,6 +34,9 @@ export const characterSlice = createSlice({
 
 export const { addCharacter, removeCharacter } = characterSlice.actions;
 
-export const selectCharacters = (state: RootState) => state.preferedCharacters;
+export const selectCharacters = (state: RootState) => state.favoriteCharacters;
+
+export const favoriteCharactersCount = (state: RootState) =>
+  state.favoriteCharacters.favoriteCharacters.length;
 
 export default characterSlice.reducer;

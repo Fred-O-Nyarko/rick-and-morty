@@ -3,4 +3,5 @@ export const routes = {
   characters: '/characters',
   episodes: '/episodes',
   locations: '/locations',
+  favorites: '/characters/favorites',
 };

@@ -3,7 +3,13 @@ import { Image } from '../elements';
 import Link from './Link';
 import { routes } from '../../routing/routes';
 import { HeartIcon } from '@heroicons/react/solid';
+import { favoriteCharactersCount } from '../../redux/characterSlice';
+import { useAppSelector } from '../../redux/hooks';
+import { useRouter } from 'next/dist/client/router';
+
 function Header() {
+  const count = useAppSelector(favoriteCharactersCount);
+  const router = useRouter();
   return (
     <nav className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10  text-white border border-white border-opacity-30 drop-shadow-lg shadow-lg flex items-center justify-between flex-wrap px-6 py-2 w-full">
       <div className="flex items-center flex-no-shrink text-white mr-6">
@@ -17,12 +23,15 @@ function Header() {
           />
         </Link>
       </div>
-      <span className="relative inline-block">
-        <HeartIcon className="h-10 w-10 text-white text-opacity-40" />
-        <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-          99
-        </span>
-      </span>
+      <button
+        className="relative bg-transparent border border-white text-white p-2 rounded text-sm font-bold overflow-visible hover:bg-opacity-70 hover:bg-black"
+        onClick={() => router.push(routes.favorites)}
+      >
+        Favorite characters
+        <div className="absolute top-0 right-0 -mt-4 -mr-4 px-4 py-1 bg-red-600 rounded-full">
+          {count}
+        </div>
+      </button>
     </nav>
   );
 }

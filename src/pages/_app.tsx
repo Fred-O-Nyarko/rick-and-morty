@@ -20,10 +20,6 @@ function MyApp({ Component, pageProps }) {
     setLoading(false);
   });
 
-  React.useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
   let persistor = persistStore(store);
 
   return (
