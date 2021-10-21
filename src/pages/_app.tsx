@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -23,19 +24,25 @@ function MyApp({ Component, pageProps }) {
   let persistor = persistStore(store);
 
   return (
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          {loading ? (
-            <PageLoader />
-          ) : (
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          )}
-        </PersistGate>
-      </Provider>
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>Rick and Morty™</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            {loading ? (
+              <PageLoader />
+            ) : (
+              <AppLayout>
+                <Component {...pageProps} />
+              </AppLayout>
+            )}
+          </PersistGate>
+        </Provider>
+      </ApolloProvider>
+    </>
   );
 }
 
