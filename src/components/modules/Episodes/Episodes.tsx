@@ -3,6 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 import { Loading } from '@/components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useFetchEpisodes } from './hooks';
+import LoadingIndicator from '@/components/elements/LoadingIndicator';
 
 function EpisodesList() {
   const [searchData, setSearchData] = React.useState('');
@@ -31,39 +32,42 @@ function EpisodesList() {
           onChange={handleSearch}
         />
       </div>
-      <InfiniteScroll
-        dataLength={episodes?.results.length ?? 0}
-        next={handleLoadMore}
-        hasMore={hasNextPage}
-        loader={<Loading />}
-        endMessage={<h4 className="text-center my-4">End of List 🥳</h4>}
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {episodes?.results.length
-            ? episodes?.results.map((episode, idx) => (
-                <div
-                  className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
-                  key={idx}
-                >
-                  <div className="relative">
-                    <div className="flex justify-between items-center p-3">
-                      <p className="tracking-wide text-sm text-shadow  font-bold ">
-                        {episode.name} <br />
-                        <span className="text-xs font-normal text-white text-opacity-70">
-                          {episode.air_date}
-                        </span>
-                      </p>
+      {loading ? (
+        <LoadingIndicator />
+      ) : (
+        <InfiniteScroll
+          dataLength={episodes?.results.length ?? 0}
+          next={handleLoadMore}
+          hasMore={hasNextPage}
+          loader={<Loading />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {episodes?.results.length
+              ? episodes?.results.map((episode, idx) => (
+                  <div
+                    className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
+                    key={idx}
+                  >
+                    <div className="relative">
+                      <div className="flex justify-between items-center p-3">
+                        <p className="tracking-wide text-sm text-shadow  font-bold ">
+                          {episode.name} <br />
+                          <span className="text-xs font-normal text-white text-opacity-70">
+                            {episode.air_date}
+                          </span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            : !loading && (
-                <div className="text-center font-bold text-white text-lg w-full col-span-12">
-                  No data available 😢
-                </div>
-              )}
-        </div>
-      </InfiniteScroll>
+                ))
+              : !loading && (
+                  <div className="text-center font-bold text-white text-lg w-full col-span-12">
+                    No data available 😢
+                  </div>
+                )}
+          </div>
+        </InfiniteScroll>
+      )}
     </div>
   );
 }

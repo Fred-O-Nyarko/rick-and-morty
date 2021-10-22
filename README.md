@@ -1,8 +1,12 @@
 # Rick and Morty API with GraphQL
 
+## Deployment
+
+- https://fred-rick-and-morty.netlify.app/
+
 ## `Stack ` Next.js + Tailwind + Apollo GraphQL
 
-This example shows how to uses the above tech stack to fetch and display data from the Rick and Morty API
+This example shows how to use the above tech stack to fetch and display data from the Rick and Morty API
 
 It also uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
 
@@ -54,6 +58,7 @@ $ yarn --ignore-engines
 
 ```
 
+|-- .vscode
 |   |-- settings.json
 |-- public
 |   |-- .DS_Store
@@ -69,158 +74,74 @@ $ yarn --ignore-engines
 |           |-- location.jpeg
 |           |-- logo.png
 |-- src
-|-- api
-|   |-- hello.tsx
-|-- components
-|   |-- index.ts
-|   |-- elements
-|   |   |-- Footer.tsx
-|   |   |-- Header.tsx
-|   |   |-- Image.tsx
-|   |   |-- Link.tsx
-|   |   |-- LoadingIndicator.tsx
-|   |   |-- Notification.tsx
-|   |   |-- PageLoader.tsx
-|   |   |-- ScrollTop.tsx
-|   |   |-- index.ts
-|   |-- modules
-|   |-- settings.json
-|-- public
-|   |-- .DS_Store
-|   |-- favicon.ico
-|   |-- vercel.svg
-|   |-- assets
-|       |-- .DS_Store
-|       |-- images
-|           |-- bg-noise.png
-|           |-- bg_2.jpeg
-|           |-- characters.jpeg
-|           |-- episode.jpeg
-|           |-- location.jpeg
-|           |-- logo.png
-|-- src
-|-- api
-|   |-- hello.tsx
-|-- components
-|   |-- index.ts
-|   |-- elements
-|   |   |-- Footer.tsx
-|   |   |-- Header.tsx
-|   |   |-- Image.tsx
-|   |   |-- Link.tsx
-|   |   |-- LoadingIndicator.tsx
-|   |   |-- Notification.tsx
-|   |   |-- PageLoader.tsx
-|   |   |-- ScrollTop.tsx
-|   |   |-- index.ts
-|   |-- modules
-|       |-- index.ts
-|       |-- Characters
-|       |   |-- CharacterProfile.tsx
-|       |   |-- Characters.tsx
-|       |   |-- Favorites.tsx
-|       |   |-- hooks.ts
-|       |   |-- utils.tsx
-|       |   |-- services
-|       |       |-- queries.ts
-|       |-- Episodes
-|       |   |-- Episodes.tsx
-|       |   |-- hooks.ts
-|       |   |-- services
-|       |       |-- queries.ts
-|       |-- Home
-|       |   |-- Home.tsx
-|       |-- Locations
-|       |   |-- Locations.tsx
-|       |   |-- hooks.ts
-|       |   |-- services
-|       |       |-- queries.ts
-|       |-- layout
-|           |-- AppLayout.tsx
-|-- configs
-|   |-- apolloClient.ts
-|   |-- index.ts
-|-- generated
-|   |-- graphql.schema.json
-|   |-- graphql.ts
-|-- pages
-|   |-- _app.tsx
-|   |-- _document.tsx
-|   |-- index.tsx
-|   |-- characters
-|   |   |-- [id].tsx
-|   |   |-- favorites.tsx
-|   |   |-- index.tsx
-|   |-- episodes
-|   |   |-- index.tsx
-|   |-- locations
-|       |-- index.tsx
-|-- redux
-|   |-- characterSlice.ts
-|   |-- hooks.ts
-|   |-- index.ts
-|   |-- store.ts
-|-- routing
-|   |-- routes.ts
-|-- shared
-|   |-- constants.ts
-|   |-- index.ts
-|-- styles
-    |-- global.css
-
-|       |-- index.ts
-|       |-- Characters
-|       |   |-- CharacterProfile.tsx
-|       |   |-- Characters.tsx
-|       |   |-- Favorites.tsx
-|       |   |-- hooks.ts
-|       |   |-- utils.tsx
-|       |   |-- services
-|       |       |-- queries.ts
-|       |-- Episodes
-|       |   |-- Episodes.tsx
-|       |   |-- hooks.ts
-|       |   |-- services
-|       |       |-- queries.ts
-|       |-- Home
-|       |   |-- Home.tsx
-|       |-- Locations
-|       |   |-- Locations.tsx
-|       |   |-- hooks.ts
-|       |   |-- services
-|       |       |-- queries.ts
-|       |-- layout
-|           |-- AppLayout.tsx
-|-- configs
-|   |-- apolloClient.ts
-|   |-- index.ts
-|-- generated
-|   |-- graphql.schema.json
-|   |-- graphql.ts
-|-- pages
-|   |-- _app.tsx
-|   |-- _document.tsx
-|   |-- index.tsx
-|   |-- characters
-|   |   |-- [id].tsx
-|   |   |-- favorites.tsx
-|   |   |-- index.tsx
-|   |-- episodes
-|   |   |-- index.tsx
-|   |-- locations
-|       |-- index.tsx
-|-- redux
-|   |-- characterSlice.ts
-|   |-- hooks.ts
-|   |-- index.ts
-|   |-- store.ts
-|-- routing
-|   |-- routes.ts
-|-- shared
-|   |-- constants.ts
-|   |-- index.ts
-|-- styles
-    |-- global.css
+    |-- api
+    |   |-- hello.tsx
+    |-- components
+    |   |-- index.ts
+    |   |-- elements
+    |   |   |-- Footer.tsx
+    |   |   |-- Header.tsx
+    |   |   |-- Image.tsx
+    |   |   |-- Link.tsx
+    |   |   |-- LoadingIndicator.tsx
+    |   |   |-- Notification.tsx
+    |   |   |-- PageLoader.tsx
+    |   |   |-- ScrollTop.tsx
+    |   |   |-- index.ts
+    |   |-- modules
+    |       |-- index.ts
+    |       |-- Characters
+    |       |   |-- CharacterProfile.tsx
+    |       |   |-- Characters.tsx
+    |       |   |-- Favorites.tsx
+    |       |   |-- hooks.ts
+    |       |   |-- utils.tsx
+    |       |   |-- services
+    |       |       |-- queries.ts
+    |       |-- Episodes
+    |       |   |-- Episodes.tsx
+    |       |   |-- hooks.ts
+    |       |   |-- services
+    |       |       |-- queries.ts
+    |       |-- Home
+    |       |   |-- Home.tsx
+    |       |-- Locations
+    |       |   |-- Locations.tsx
+    |       |   |-- hooks.ts
+    |       |   |-- services
+    |       |       |-- queries.ts
+    |       |-- layout
+    |           |-- AppLayout.tsx
+    |-- configs
+    |   |-- apolloClient.ts
+    |   |-- index.ts
+    |-- generated
+    |   |-- graphql.schema.json
+    |   |-- graphql.ts
+    |-- pages
+    |   |-- _app.tsx
+    |   |-- _document.tsx
+    |   |-- index.tsx
+    |   |-- characters
+    |   |   |-- [id].tsx
+    |   |   |-- favorites.tsx
+    |   |   |-- index.tsx
+    |   |-- episodes
+    |   |   |-- index.tsx
+    |   |-- locations
+    |       |-- index.tsx
+    |-- redux
+    |   |-- characterSlice.ts
+    |   |-- hooks.ts
+    |   |-- index.ts
+    |   |-- store.ts
+    |-- routing
+    |   |-- routes.ts
+    |-- shared
+    |   |-- constants.ts
+    |   |-- index.ts
+    |-- styles
+        |-- global.css
 
 
 ```

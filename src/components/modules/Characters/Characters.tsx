@@ -13,6 +13,7 @@ import {
 } from '../../../redux';
 import { isInList } from './utils';
 import { useFetchCharacters } from './hooks';
+import LoadingIndicator from '@/components/elements/LoadingIndicator';
 
 interface NotificationProps {
   action: 'add' | 'remove';
@@ -70,6 +71,7 @@ const CharactersList = () => {
           notification?.action === 'add' ? 'added to' : 'removed from'
         } favorites`}
       />
+
       <div className="container mx-auto w-full md:w-2/3 my-5 p-5 md:p-0">
         <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white shadow p-2 flex mb-5">
           <span className="w-auto flex justify-end items-center text-white text-opacity-40 p-2">
@@ -83,60 +85,64 @@ const CharactersList = () => {
           />
         </div>
 
-        <InfiniteScroll
-          dataLength={characters?.results.length ?? 0}
-          next={handleLoadMore}
-          hasMore={hasNextPage}
-          loader={<Loading />}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            {characters?.results.length
-              ? characters?.results.map((character, idx) => (
-                  <div
-                    className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
-                    key={idx}
-                    onClick={() =>
-                      router.push({
-                        pathname: `${routes.characters}/[id]`,
-                        query: { id: character.id },
-                      })
-                    }
-                  >
-                    <div className="relative">
-                      <Image
-                        src={character.image}
-                        alt={character.name}
-                        height={3}
-                        width={4}
-                        layout="responsive"
-                        objectFit="cover"
-                        className="group-hover:opacity-50"
-                      />
-                      <div className="flex justify-between items-center p-3">
-                        <p className="tracking-wide text-sm text-shadow  font-bold ">
-                          {character.name}
-                        </p>
-                        <button
-                          onClick={(e) => handleClick(e, character)}
-                          className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 bg-transparent transition-colors duration-150 rounded focus:shadow-outline z-10"
-                        >
-                          {isInList(favoriteCharacters, character) ? (
-                            <>🗑</>
-                          ) : (
-                            <>❤️</>
-                          )}
-                        </button>
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <InfiniteScroll
+            dataLength={characters?.results.length ?? 0}
+            next={handleLoadMore}
+            hasMore={hasNextPage}
+            loader={<Loading />}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+              {characters?.results.length
+                ? characters?.results.map((character, idx) => (
+                    <div
+                      className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
+                      key={idx}
+                      onClick={() =>
+                        router.push({
+                          pathname: `${routes.characters}/[id]`,
+                          query: { id: character.id },
+                        })
+                      }
+                    >
+                      <div className="relative">
+                        <Image
+                          src={character.image}
+                          alt={character.name}
+                          height={3}
+                          width={4}
+                          layout="responsive"
+                          objectFit="cover"
+                          className="group-hover:opacity-50"
+                        />
+                        <div className="flex justify-between items-center p-3">
+                          <p className="tracking-wide text-sm text-shadow  font-bold ">
+                            {character.name}
+                          </p>
+                          <button
+                            onClick={(e) => handleClick(e, character)}
+                            className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 bg-transparent transition-colors duration-150 rounded focus:shadow-outline z-10"
+                          >
+                            {isInList(favoriteCharacters, character) ? (
+                              <>🗑</>
+                            ) : (
+                              <>❤️</>
+                            )}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
-              : !loading && (
-                  <div className="text-center font-bold text-white text-lg w-full col-span-12">
-                    No data available 😢
-                  </div>
-                )}
-          </div>
-        </InfiniteScroll>
+                  ))
+                : !loading && (
+                    <div className="text-center font-bold text-white text-lg w-full col-span-12">
+                      No data available 😢
+                    </div>
+                  )}
+            </div>
+          </InfiniteScroll>
+        )}
       </div>
     </>
   );
