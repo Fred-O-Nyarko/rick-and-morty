@@ -33,7 +33,7 @@ function LocationsList() {
           onChange={handleSearch}
         />
       </div>
-      ( loading ? <Loading /> : (
+      {loading && <Loading />}
       <InfiniteScroll
         dataLength={locations?.results.length ?? 0}
         next={handleLoadMore}
@@ -66,7 +66,6 @@ function LocationsList() {
               )}
         </div>
       </InfiniteScroll>
-      ) )
     </div>
   );
 }

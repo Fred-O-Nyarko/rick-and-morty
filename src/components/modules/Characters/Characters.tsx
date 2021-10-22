@@ -85,64 +85,61 @@ const CharactersList = () => {
           />
         </div>
 
-        {loading ? (
-          <LoadingIndicator />
-        ) : (
-          <InfiniteScroll
-            dataLength={characters?.results.length ?? 0}
-            next={handleLoadMore}
-            hasMore={hasNextPage}
-            loader={<Loading />}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-              {characters?.results.length
-                ? characters?.results.map((character, idx) => (
-                    <div
-                      className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
-                      key={idx}
-                      onClick={() =>
-                        router.push({
-                          pathname: `${routes.characters}/[id]`,
-                          query: { id: character.id },
-                        })
-                      }
-                    >
-                      <div className="relative">
-                        <Image
-                          src={character.image}
-                          alt={character.name}
-                          height={3}
-                          width={4}
-                          layout="responsive"
-                          objectFit="cover"
-                          className="group-hover:opacity-50"
-                        />
-                        <div className="flex justify-between items-center p-3">
-                          <p className="tracking-wide text-sm text-shadow  font-bold ">
-                            {character.name}
-                          </p>
-                          <button
-                            onClick={(e) => handleClick(e, character)}
-                            className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 bg-transparent transition-colors duration-150 rounded focus:shadow-outline z-10"
-                          >
-                            {isInList(favoriteCharacters, character) ? (
-                              <>🗑</>
-                            ) : (
-                              <>❤️</>
-                            )}
-                          </button>
-                        </div>
+        {loading && <Loading />}
+        <InfiniteScroll
+          dataLength={characters?.results.length ?? 0}
+          next={handleLoadMore}
+          hasMore={hasNextPage}
+          loader={<Loading />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {characters?.results.length
+              ? characters?.results.map((character, idx) => (
+                  <div
+                    className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
+                    key={idx}
+                    onClick={() =>
+                      router.push({
+                        pathname: `${routes.characters}/[id]`,
+                        query: { id: character.id },
+                      })
+                    }
+                  >
+                    <div className="relative">
+                      <Image
+                        src={character.image}
+                        alt={character.name}
+                        height={3}
+                        width={4}
+                        layout="responsive"
+                        objectFit="cover"
+                        className="group-hover:opacity-50"
+                      />
+                      <div className="flex justify-between items-center p-3">
+                        <p className="tracking-wide text-sm text-shadow  font-bold ">
+                          {character.name}
+                        </p>
+                        <button
+                          onClick={(e) => handleClick(e, character)}
+                          className="hidden group-hover:inline-flex items-center justify-center w-7 h-7 mr-2 bg-transparent transition-colors duration-150 rounded focus:shadow-outline z-10"
+                        >
+                          {isInList(favoriteCharacters, character) ? (
+                            <>🗑</>
+                          ) : (
+                            <>❤️</>
+                          )}
+                        </button>
                       </div>
                     </div>
-                  ))
-                : !loading && (
-                    <div className="text-center font-bold text-white text-lg w-full col-span-12">
-                      No data available 😢
-                    </div>
-                  )}
-            </div>
-          </InfiniteScroll>
-        )}
+                  </div>
+                ))
+              : !loading && (
+                  <div className="text-center font-bold text-white text-lg w-full col-span-12">
+                    No data available 😢
+                  </div>
+                )}
+          </div>
+        </InfiniteScroll>
       </div>
     </>
   );
