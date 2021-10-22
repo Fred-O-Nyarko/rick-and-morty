@@ -24,7 +24,7 @@ function Favorites() {
     dispatch(addCharacter(character));
   }
   return (
-    <div className="container  mx-auto w-full md:w-2/3 min-h-screen my-5">
+    <div className="container  mx-auto w-full md:w-2/3 my-5 p-4 md:p-0 lg:p-0">
       <div className="flex flex-1 flex-col justify-center items-center ">
         <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg p-6 mb-4 w-full">
           <div className="text-lg font-bold"> Favorite Characters ❤️</div>

@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 
 function LocationsList() {
   const [searchData, setSearchData] = React.useState('');
-  const { data, loading, error, fetchMore, networkStatus } = useQuery<
+  const { data, loading, fetchMore, networkStatus } = useQuery<
     { locations: Locations },
     QueryEpisodesArgs
   >(GET_LOCATIONS, {
@@ -20,7 +20,6 @@ function LocationsList() {
   const hasNextPage = !!next;
   const isSetVariables = networkStatus === 2;
   const locations = !isSetVariables ? data?.locations : undefined;
-  console.log(next);
 
   const handleLoadMore = React.useCallback(
     () =>
@@ -34,7 +33,6 @@ function LocationsList() {
     setSearchData(e.target.value);
   }
 
-  const router = useRouter();
   return (
     <div className="container mx-auto w-full md:w-2/3 my-5">
       <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white shadow p-2 flex mb-5">

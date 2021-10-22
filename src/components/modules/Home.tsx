@@ -21,7 +21,7 @@ function Home() {
     },
   ];
   return (
-    <div className="container mx-auto sm:max-w-none px-4 h-full flex items-center justify-center flex-1">
+    <div className="container mx-auto sm:max-w-none px-4 h-full flex items-center justify-center flex-1 md:mt-20 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
         {data.map((detail, idx) => (
           <div
@@ -32,6 +32,7 @@ function Home() {
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center center',
             }}
+            key={idx}
           >
             <div className="h-full w-full absolute bg-black hover:bg-opacity-0 bg-opacity-60 hover:border-4 border-white border-opacity-80 rounded z-1 transition-all"></div>
             <div className="px-6 py-4 h-full flex flex-col justify-center items-center ">
@@ -46,18 +47,12 @@ function Home() {
                     dominant-baseline="middle"
                     text-anchor="middle"
                     fill="#fff"
+                    fontSize="20"
                     className="font-bold drop-shadow"
                   >
                     {detail.title}
                   </text>
                   <rect id="shape" height="40" width="150" />
-
-                  {/* <div id="text">
-                    <div className="font-bold text-xl text-white">
-                      <span className="spot"></span>
-                      
-                    </div>
-                  </div> */}
                 </svg>
               </div>
             </div>

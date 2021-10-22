@@ -1,29 +1,164 @@
-# Next.js + Tailwind CSS Example
+# Rick and Morty API with GraphQL
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v2.2)](https://blog.tailwindcss.com/tailwindcss-2-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## `Stack ` Next.js + Tailwind + Apollo GraphQL
 
-It uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
+This example shows how to uses the above tech stack to fetch and display data from the Rick and Morty API
 
-## Preview
+It also uses the new [`Just-in-Time Mode`](https://tailwindcss.com/docs/just-in-time-mode) for Tailwind CSS.
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+## A few things to note in the project:
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## Installation
 
-## Deploy your own
+#### 1. Clone this repo
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+```
+$ git git@github.com:FreeHill/rick-and-morty
+$ cd rick-and-morty
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+#### 2. Install dependencies
+
+```
+$ yarn install
+```
+
+if you encounter errors with the node engine
+
+```
+$ yarn --ignore-engines
+```
+
+## To do
+
+- Write tests for components
+- Error handling
+- Code refactor
+
+## Contribution
+
+### Git Workflow
+
+- Contribution to this project must follow the
+  **[GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=Gitflow%20is%20a%20legacy%20Git,software%20development%20and%20DevOps%20practices.)**
+  workflow
+
+### Commits
+
+- Commits messages must follow **[Conventional Commits Spec](https://www.conventionalcommits.org/en/v1.0.0/)**
+
+- Use `yarn commit` to commit messages
+
+## Directory Structure
+
+```
+    |-- .DS_Store
+    |-- .eslintignore
+    |-- .eslintrc.js
+    |-- .gitignore
+    |-- .lintstagedrc
+    |-- .prettierignore
+    |-- .prettierrc
+    |-- README.md
+    |-- codegen.yml
+    |-- commitlint.config.js
+    |-- declarations.d.ts
+    |-- next-env.d.ts
+    |-- next.config.js
+    |-- package.json
+    |-- postcss.config.js
+    |-- tailwind.config.js
+    |-- tsconfig.json
+    |-- yarn-error.log
+    |-- yarn.lock
+    |-- .husky
+    |   |-- commit-msg
+    |   |-- pre-commit
+    |   |-- _
+    |       |-- .gitignore
+    |       |-- husky.sh
+      |   |-- settings.json
+    |-- public
+    |   |-- .DS_Store
+    |   |-- favicon.ico
+    |   |-- vercel.svg
+    |   |-- assets
+    |       |-- .DS_Store
+    |       |-- images
+    |           |-- bg-noise.png
+    |           |-- bg_2.jpeg
+    |           |-- bg_dark.jpeg
+    |           |-- bg_grey.png
+    |           |-- bg_red.jpeg
+    |           |-- characters.jpeg
+    |           |-- episode.jpeg
+    |           |-- location.jpeg
+    |           |-- logo.png
+    |           |-- rick_morty_bg.png
+    |-- src
+        |-- api
+        |   |-- hello.tsx
+        |-- components
+        |   |-- index.ts
+        |   |-- elements
+        |   |   |-- Footer.tsx
+        |   |   |-- Header.tsx
+        |   |   |-- Image.tsx
+        |   |   |-- Link.tsx
+        |   |   |-- LoadingIndicator.tsx
+        |   |   |-- Notification.tsx
+        |   |   |-- PageLoader.tsx
+        |   |   |-- ScrollTop.tsx
+        |   |   |-- index.ts
+        |   |-- modules
+        |       |-- Home.tsx
+        |       |-- Characters
+        |       |   |-- CharacterProfile.tsx
+        |       |   |-- Characters.tsx
+        |       |   |-- Favorites.tsx
+        |       |   |-- utils.tsx
+        |       |   |-- services
+        |       |       |-- queries.ts
+        |       |-- Episodes
+        |       |   |-- Episodes.tsx
+        |       |   |-- services
+        |       |       |-- queries.ts
+        |       |-- Home
+        |       |-- Locations
+        |       |   |-- Locations.tsx
+        |       |   |-- services
+        |       |       |-- queries.ts
+        |       |-- layout
+        |           |-- AppLayout.tsx
+        |-- configs
+        |   |-- apolloClient.ts
+        |   |-- index.ts
+        |-- generated
+        |   |-- graphql.schema.json
+        |   |-- graphql.ts
+        |-- pages
+        |   |-- _app.tsx
+        |   |-- _document.tsx
+        |   |-- index.tsx
+        |   |-- characters
+        |   |   |-- [id].tsx
+        |   |   |-- favorites.tsx
+        |   |   |-- index.tsx
+        |   |-- episodes
+        |   |   |-- index.tsx
+        |   |-- locations
+        |       |-- index.tsx
+        |-- redux
+        |   |-- characterSlice.ts
+        |   |-- hooks.ts
+        |   |-- index.ts
+        |   |-- store.ts
+        |-- routing
+        |   |-- routes.ts
+        |-- shared
+        |   |-- constants.ts
+        |   |-- index.ts
+        |-- styles
+            |-- global.css
+
+```

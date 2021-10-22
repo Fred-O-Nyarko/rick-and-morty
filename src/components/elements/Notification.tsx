@@ -9,8 +9,7 @@ const Notification = ({ showNotification, message }: NotificationProps) => {
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setFlag(!flag);
-      console.log('done', flag);
+      showNotification && setFlag(!flag);
     }, 1000);
 
     return () => {
@@ -81,4 +80,4 @@ const Notification = ({ showNotification, message }: NotificationProps) => {
     </div>
   );
 };
-export default Notification;
+export default React.memo(Notification);

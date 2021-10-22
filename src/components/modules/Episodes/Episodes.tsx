@@ -21,7 +21,6 @@ function EpisodesList() {
   const hasNextPage = !!next;
   const isSetVariables = networkStatus === 2;
   const episodes = !isSetVariables ? data?.episodes : undefined;
-  console.log(next);
 
   const handleLoadMore = React.useCallback(
     () =>
@@ -37,7 +36,7 @@ function EpisodesList() {
 
   const router = useRouter();
   return (
-    <div className="container mx-auto w-full md:w-2/3 my-5">
+    <div className="container mx-auto w-full md:w-2/3 my-5 p-4 md:p-0 lg:p-0">
       <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white shadow p-2 flex mb-5">
         <span className="w-auto flex justify-end items-center text-white text-opacity-40 p-2">
           🔍

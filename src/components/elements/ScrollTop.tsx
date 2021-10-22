@@ -23,7 +23,7 @@ const ScrollArrow = () => {
       style={{ height: 60, display: showScroll ? 'flex' : 'none' }}
       className="fixed w-full bottom-5 items-center h-5 justify-end z-50 cursor-pointer scroll-top hover:opacity-100  opacity-80 transition-opacity duration-500 fade__in"
     >
-      <button className="text-6xl -mt-24 mr-8 text-white px-4 w-auto h-10 rounded-full shadow-lg mouse  transition ease-in duration-100 focus:outline-none">
+      <button className="text-6xl -mt-24 mr-8 text-white px-4 w-auto h-20 rounded-full shadow-lg mouse  transition ease-in duration-100 focus:outline-none">
         ⬆️
       </button>
       <style>
