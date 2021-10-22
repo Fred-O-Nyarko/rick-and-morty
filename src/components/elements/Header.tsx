@@ -4,7 +4,7 @@ import Link from './Link';
 import { routes } from '../../routing/routes';
 import { favoriteCharactersCount } from '../../redux/characterSlice';
 import { useAppSelector } from '../../redux/hooks';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 function Header() {
   const count = useAppSelector(favoriteCharactersCount);

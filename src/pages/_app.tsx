@@ -14,10 +14,10 @@ import Head from 'next/head';
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  Router.events.on('routeChangeStart', (url) => {
+  Router.events.on('routeChangeStart', () => {
     setLoading(true);
   });
-  Router.events.on('routeChangeComplete', (url) => {
+  Router.events.on('routeChangeComplete', () => {
     setLoading(false);
   });
 
