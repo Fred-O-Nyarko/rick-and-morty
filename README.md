@@ -34,6 +34,7 @@ $ yarn --ignore-engines
 - Write tests for components
 - Error handling
 - Code refactor
+- Fix locations and episodes not fetching more bug
 
 ## Contribution
 

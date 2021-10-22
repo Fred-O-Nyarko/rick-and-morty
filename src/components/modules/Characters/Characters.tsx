@@ -37,6 +37,11 @@ const CharactersList = () => {
     fetchPolicy: 'cache-first',
   });
 
+  // TODO: do proper error handling
+  if (error) {
+    throw error;
+  }
+
   const next = data?.characters?.info?.next;
   const hasNextPage = !!next;
   const isSetVariables = networkStatus === 2;

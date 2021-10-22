@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/dist/client/router';
-import { Loading, Image } from '@/components';
-import { routes } from '@/routing/routes';
+import { Loading } from '@/components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Episodes, QueryEpisodesArgs } from '@/generated/graphql';
 import { GET_EPISODES } from './services/queries';
@@ -16,6 +15,11 @@ function EpisodesList() {
     variables: { filter: { name: searchData } },
     notifyOnNetworkStatusChange: true,
   });
+
+  // TODO: do proper error handling
+  if (error) {
+    throw error;
+  }
 
   const next = data?.episodes?.info?.next;
   const hasNextPage = !!next;

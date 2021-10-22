@@ -1,20 +1,24 @@
 import React from 'react';
-import { useRouter } from 'next/dist/client/router';
-import { Loading, Image } from '@/components';
+import { Loading } from '@/components';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Episodes, Locations, QueryEpisodesArgs } from '@/generated/graphql';
+import { Locations, QueryEpisodesArgs } from '@/generated/graphql';
 import { GET_LOCATIONS } from './services/queries';
 import { useQuery } from '@apollo/client';
 
 function LocationsList() {
   const [searchData, setSearchData] = React.useState('');
-  const { data, loading, fetchMore, networkStatus } = useQuery<
+  const { data, loading, fetchMore, networkStatus, error } = useQuery<
     { locations: Locations },
     QueryEpisodesArgs
   >(GET_LOCATIONS, {
     variables: { filter: { name: searchData } },
     notifyOnNetworkStatusChange: true,
   });
+
+  // TODO: do proper error handling
+  if (error) {
+    throw error;
+  }
 
   const next = data?.locations?.info?.next;
   const hasNextPage = !!next;
