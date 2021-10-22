@@ -2,43 +2,22 @@ import React from 'react';
 import { useRouter } from 'next/dist/client/router';
 import { Loading } from '@/components';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Episodes, QueryEpisodesArgs } from '@/generated/graphql';
-import { GET_EPISODES } from './services/queries';
-import { useQuery } from '@apollo/client';
+import { useFetchEpisodes } from './hooks';
 
 function EpisodesList() {
   const [searchData, setSearchData] = React.useState('');
-  const { data, loading, error, fetchMore, networkStatus } = useQuery<
-    { episodes: Episodes },
-    QueryEpisodesArgs
-  >(GET_EPISODES, {
-    variables: { filter: { name: searchData } },
-    notifyOnNetworkStatusChange: true,
-  });
+  const { episodes, loading, handleLoadMore, error, hasNextPage } =
+    useFetchEpisodes({ name: searchData });
 
   // TODO: do proper error handling
   if (error) {
-    throw error;
+    console.log(error);
   }
-
-  const next = data?.episodes?.info?.next;
-  const hasNextPage = !!next;
-  const isSetVariables = networkStatus === 2;
-  const episodes = !isSetVariables ? data?.episodes : undefined;
-
-  const handleLoadMore = React.useCallback(
-    () =>
-      fetchMore({
-        variables: { page: next },
-      }),
-    [fetchMore, next],
-  );
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchData(e.target.value);
   }
 
-  const router = useRouter();
   return (
     <div className="container mx-auto w-full md:w-2/3 my-5 p-4 md:p-0 lg:p-0">
       <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white shadow p-2 flex mb-5">

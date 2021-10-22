@@ -1,12 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/dist/client/router';
-import { useQuery } from '@apollo/client';
-import { GET_CHARACTERS } from './services/queries';
-import {
-  Character,
-  Characters,
-  QueryCharactersArgs,
-} from '@/generated/graphql';
+import { Character } from '@/generated/graphql';
 import { Loading, Image, Notification } from '../../elements';
 import { routes } from '@/routing/routes';
 
@@ -18,6 +12,7 @@ import {
   useAppSelector,
 } from '../../../redux';
 import { isInList } from './utils';
+import { useFetchCharacters } from './hooks';
 
 interface NotificationProps {
   action: 'add' | 'remove';
@@ -26,26 +21,14 @@ interface NotificationProps {
 
 const CharactersList = () => {
   const router = useRouter();
-
   const [searchData, setSearchData] = React.useState('');
-  const { data, loading, error, fetchMore, networkStatus } = useQuery<
-    { characters: Characters },
-    QueryCharactersArgs
-  >(GET_CHARACTERS, {
-    variables: { filter: { name: searchData } },
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-first',
-  });
+  const { characters, loading, error, hasNextPage, handleLoadMore } =
+    useFetchCharacters({ name: searchData });
 
   // TODO: do proper error handling
   if (error) {
-    throw error;
+    console.log(error);
   }
-
-  const next = data?.characters?.info?.next;
-  const hasNextPage = !!next;
-  const isSetVariables = networkStatus === 2;
-  const characters = !isSetVariables ? data?.characters : undefined;
 
   const dispatch = useAppDispatch();
   const favoriteCharacters = useAppSelector(
@@ -57,14 +40,6 @@ const CharactersList = () => {
   >();
 
   const [clicked, toggleClicked] = React.useState<boolean>();
-
-  const handleLoadMore = React.useCallback(
-    () =>
-      fetchMore({
-        variables: { page: next },
-      }),
-    [fetchMore, next],
-  );
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchData(e.target.value);
@@ -95,7 +70,7 @@ const CharactersList = () => {
           notification?.action === 'add' ? 'added to' : 'removed from'
         } favorites`}
       />
-      <div className="container mx-auto w-full md:w-2/3 my-5 ">
+      <div className="container mx-auto w-full md:w-2/3 my-5 p-5 md:p-0">
         <div className="backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white shadow p-2 flex mb-5">
           <span className="w-auto flex justify-end items-center text-white text-opacity-40 p-2">
             🔍

@@ -10,7 +10,7 @@ function Header() {
   const count = useAppSelector(favoriteCharactersCount);
   const router = useRouter();
   return (
-    <nav className="fixed z-10 backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10  text-white border border-white border-opacity-30 drop-shadow-lg shadow-lg flex items-center justify-between flex-wrap px-6 py-2 w-full">
+    <nav className="fixed z-30 backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10  text-white border border-white border-opacity-30 drop-shadow-lg shadow-lg flex items-center justify-between flex-wrap px-6 py-2 w-full">
       <div className="flex items-center flex-no-shrink text-white mr-6">
         <Link href={routes.home} className="hover:cursor-pointer">
           <Image

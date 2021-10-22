@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/dist/client/router';
 
-function Home() {
+const Home = () => {
   const router = useRouter();
   const data = [
     {
@@ -61,6 +61,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

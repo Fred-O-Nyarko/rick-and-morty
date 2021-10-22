@@ -4,34 +4,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Locations, QueryEpisodesArgs } from '@/generated/graphql';
 import { GET_LOCATIONS } from './services/queries';
 import { useQuery } from '@apollo/client';
+import { useFetchLocations } from './hooks';
 
 function LocationsList() {
   const [searchData, setSearchData] = React.useState('');
-  const { data, loading, fetchMore, networkStatus, error } = useQuery<
-    { locations: Locations },
-    QueryEpisodesArgs
-  >(GET_LOCATIONS, {
-    variables: { filter: { name: searchData } },
-    notifyOnNetworkStatusChange: true,
-  });
+  const { locations, loading, error, handleLoadMore, hasNextPage } =
+    useFetchLocations({ name: searchData });
 
   // TODO: do proper error handling
   if (error) {
-    throw error;
+    console.log(error);
   }
-
-  const next = data?.locations?.info?.next;
-  const hasNextPage = !!next;
-  const isSetVariables = networkStatus === 2;
-  const locations = !isSetVariables ? data?.locations : undefined;
-
-  const handleLoadMore = React.useCallback(
-    () =>
-      fetchMore({
-        variables: { page: next },
-      }),
-    [fetchMore, next],
-  );
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchData(e.target.value);

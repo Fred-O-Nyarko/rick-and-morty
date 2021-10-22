@@ -2,7 +2,7 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from '../configs';
 import '../styles/global.css';
 import 'tailwindcss/tailwind.css';
-import { AppLayout, PageLoader } from '../components';
+import { AppLayout, PageLoader } from '@/components';
 import Router from 'next/router';
 import React from 'react';
 import { Provider } from 'react-redux';

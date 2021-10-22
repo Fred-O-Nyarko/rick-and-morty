@@ -53,113 +53,174 @@ $ yarn --ignore-engines
 ## Directory Structure
 
 ```
-    |-- .DS_Store
-    |-- .eslintignore
-    |-- .eslintrc.js
-    |-- .gitignore
-    |-- .lintstagedrc
-    |-- .prettierignore
-    |-- .prettierrc
-    |-- README.md
-    |-- codegen.yml
-    |-- commitlint.config.js
-    |-- declarations.d.ts
-    |-- next-env.d.ts
-    |-- next.config.js
-    |-- package.json
-    |-- postcss.config.js
-    |-- tailwind.config.js
-    |-- tsconfig.json
-    |-- yarn-error.log
-    |-- yarn.lock
-    |-- .husky
-    |   |-- commit-msg
-    |   |-- pre-commit
-    |   |-- _
-    |       |-- .gitignore
-    |       |-- husky.sh
-      |   |-- settings.json
-    |-- public
-    |   |-- .DS_Store
-    |   |-- favicon.ico
-    |   |-- vercel.svg
-    |   |-- assets
-    |       |-- .DS_Store
-    |       |-- images
-    |           |-- bg-noise.png
-    |           |-- bg_2.jpeg
-    |           |-- bg_dark.jpeg
-    |           |-- bg_grey.png
-    |           |-- bg_red.jpeg
-    |           |-- characters.jpeg
-    |           |-- episode.jpeg
-    |           |-- location.jpeg
-    |           |-- logo.png
-    |           |-- rick_morty_bg.png
-    |-- src
-        |-- api
-        |   |-- hello.tsx
-        |-- components
-        |   |-- index.ts
-        |   |-- elements
-        |   |   |-- Footer.tsx
-        |   |   |-- Header.tsx
-        |   |   |-- Image.tsx
-        |   |   |-- Link.tsx
-        |   |   |-- LoadingIndicator.tsx
-        |   |   |-- Notification.tsx
-        |   |   |-- PageLoader.tsx
-        |   |   |-- ScrollTop.tsx
-        |   |   |-- index.ts
-        |   |-- modules
-        |       |-- Home.tsx
-        |       |-- Characters
-        |       |   |-- CharacterProfile.tsx
-        |       |   |-- Characters.tsx
-        |       |   |-- Favorites.tsx
-        |       |   |-- utils.tsx
-        |       |   |-- services
-        |       |       |-- queries.ts
-        |       |-- Episodes
-        |       |   |-- Episodes.tsx
-        |       |   |-- services
-        |       |       |-- queries.ts
-        |       |-- Home
-        |       |-- Locations
-        |       |   |-- Locations.tsx
-        |       |   |-- services
-        |       |       |-- queries.ts
-        |       |-- layout
-        |           |-- AppLayout.tsx
-        |-- configs
-        |   |-- apolloClient.ts
-        |   |-- index.ts
-        |-- generated
-        |   |-- graphql.schema.json
-        |   |-- graphql.ts
-        |-- pages
-        |   |-- _app.tsx
-        |   |-- _document.tsx
-        |   |-- index.tsx
-        |   |-- characters
-        |   |   |-- [id].tsx
-        |   |   |-- favorites.tsx
-        |   |   |-- index.tsx
-        |   |-- episodes
-        |   |   |-- index.tsx
-        |   |-- locations
-        |       |-- index.tsx
-        |-- redux
-        |   |-- characterSlice.ts
-        |   |-- hooks.ts
-        |   |-- index.ts
-        |   |-- store.ts
-        |-- routing
-        |   |-- routes.ts
-        |-- shared
-        |   |-- constants.ts
-        |   |-- index.ts
-        |-- styles
-            |-- global.css
+
+|   |-- settings.json
+|-- public
+|   |-- .DS_Store
+|   |-- favicon.ico
+|   |-- vercel.svg
+|   |-- assets
+|       |-- .DS_Store
+|       |-- images
+|           |-- bg-noise.png
+|           |-- bg_2.jpeg
+|           |-- characters.jpeg
+|           |-- episode.jpeg
+|           |-- location.jpeg
+|           |-- logo.png
+|-- src
+|-- api
+|   |-- hello.tsx
+|-- components
+|   |-- index.ts
+|   |-- elements
+|   |   |-- Footer.tsx
+|   |   |-- Header.tsx
+|   |   |-- Image.tsx
+|   |   |-- Link.tsx
+|   |   |-- LoadingIndicator.tsx
+|   |   |-- Notification.tsx
+|   |   |-- PageLoader.tsx
+|   |   |-- ScrollTop.tsx
+|   |   |-- index.ts
+|   |-- modules
+|   |-- settings.json
+|-- public
+|   |-- .DS_Store
+|   |-- favicon.ico
+|   |-- vercel.svg
+|   |-- assets
+|       |-- .DS_Store
+|       |-- images
+|           |-- bg-noise.png
+|           |-- bg_2.jpeg
+|           |-- characters.jpeg
+|           |-- episode.jpeg
+|           |-- location.jpeg
+|           |-- logo.png
+|-- src
+|-- api
+|   |-- hello.tsx
+|-- components
+|   |-- index.ts
+|   |-- elements
+|   |   |-- Footer.tsx
+|   |   |-- Header.tsx
+|   |   |-- Image.tsx
+|   |   |-- Link.tsx
+|   |   |-- LoadingIndicator.tsx
+|   |   |-- Notification.tsx
+|   |   |-- PageLoader.tsx
+|   |   |-- ScrollTop.tsx
+|   |   |-- index.ts
+|   |-- modules
+|       |-- index.ts
+|       |-- Characters
+|       |   |-- CharacterProfile.tsx
+|       |   |-- Characters.tsx
+|       |   |-- Favorites.tsx
+|       |   |-- hooks.ts
+|       |   |-- utils.tsx
+|       |   |-- services
+|       |       |-- queries.ts
+|       |-- Episodes
+|       |   |-- Episodes.tsx
+|       |   |-- hooks.ts
+|       |   |-- services
+|       |       |-- queries.ts
+|       |-- Home
+|       |   |-- Home.tsx
+|       |-- Locations
+|       |   |-- Locations.tsx
+|       |   |-- hooks.ts
+|       |   |-- services
+|       |       |-- queries.ts
+|       |-- layout
+|           |-- AppLayout.tsx
+|-- configs
+|   |-- apolloClient.ts
+|   |-- index.ts
+|-- generated
+|   |-- graphql.schema.json
+|   |-- graphql.ts
+|-- pages
+|   |-- _app.tsx
+|   |-- _document.tsx
+|   |-- index.tsx
+|   |-- characters
+|   |   |-- [id].tsx
+|   |   |-- favorites.tsx
+|   |   |-- index.tsx
+|   |-- episodes
+|   |   |-- index.tsx
+|   |-- locations
+|       |-- index.tsx
+|-- redux
+|   |-- characterSlice.ts
+|   |-- hooks.ts
+|   |-- index.ts
+|   |-- store.ts
+|-- routing
+|   |-- routes.ts
+|-- shared
+|   |-- constants.ts
+|   |-- index.ts
+|-- styles
+    |-- global.css
+
+|       |-- index.ts
+|       |-- Characters
+|       |   |-- CharacterProfile.tsx
+|       |   |-- Characters.tsx
+|       |   |-- Favorites.tsx
+|       |   |-- hooks.ts
+|       |   |-- utils.tsx
+|       |   |-- services
+|       |       |-- queries.ts
+|       |-- Episodes
+|       |   |-- Episodes.tsx
+|       |   |-- hooks.ts
+|       |   |-- services
+|       |       |-- queries.ts
+|       |-- Home
+|       |   |-- Home.tsx
+|       |-- Locations
+|       |   |-- Locations.tsx
+|       |   |-- hooks.ts
+|       |   |-- services
+|       |       |-- queries.ts
+|       |-- layout
+|           |-- AppLayout.tsx
+|-- configs
+|   |-- apolloClient.ts
+|   |-- index.ts
+|-- generated
+|   |-- graphql.schema.json
+|   |-- graphql.ts
+|-- pages
+|   |-- _app.tsx
+|   |-- _document.tsx
+|   |-- index.tsx
+|   |-- characters
+|   |   |-- [id].tsx
+|   |   |-- favorites.tsx
+|   |   |-- index.tsx
+|   |-- episodes
+|   |   |-- index.tsx
+|   |-- locations
+|       |-- index.tsx
+|-- redux
+|   |-- characterSlice.ts
+|   |-- hooks.ts
+|   |-- index.ts
+|   |-- store.ts
+|-- routing
+|   |-- routes.ts
+|-- shared
+|   |-- constants.ts
+|   |-- index.ts
+|-- styles
+    |-- global.css
+
 
 ```
