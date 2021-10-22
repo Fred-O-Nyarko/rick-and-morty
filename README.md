@@ -33,6 +33,12 @@ if you encounter errors with the node engine
 $ yarn --ignore-engines
 ```
 
+### 3. Start App
+
+```
+$ yarn dev
+```
+
 ## To do
 
 - Write tests for components
