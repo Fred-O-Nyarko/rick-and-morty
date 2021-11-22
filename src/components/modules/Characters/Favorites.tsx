@@ -11,7 +11,7 @@ import { isInList } from './utils';
 
 function Favorites() {
   const favoriteCharacters = useAppSelector(
-    (state) => state.favoriteCharacters.favoriteCharacters,
+    (state) => state.characters.favoriteCharacters,
   );
   const router = useRouter();
   const dispatch = useDispatch();

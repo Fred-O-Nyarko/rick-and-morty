@@ -14,6 +14,7 @@ import {
 import { isInList } from './utils';
 import { useFetchCharacters } from './hooks';
 import LoadingIndicator from '@/components/elements/LoadingIndicator';
+import { setCharacterProfile } from '@/redux/characterSlice';
 
 interface NotificationProps {
   action: 'add' | 'remove';
@@ -33,7 +34,7 @@ const CharactersList = () => {
 
   const dispatch = useAppDispatch();
   const favoriteCharacters = useAppSelector(
-    (state) => state.favoriteCharacters.favoriteCharacters,
+    (state) => state.characters.favoriteCharacters,
   );
 
   const [notification, setNotification] = React.useState<
@@ -98,12 +99,13 @@ const CharactersList = () => {
                   <div
                     className="group backdrop backdrop-filter backdrop-blur-sm  bg-white bg-opacity-10 rounded text-white border border-white shadow-lg  hover:cursor-pointer hover:bg-opacity-90 hover:bg-black transition-all"
                     key={idx}
-                    onClick={() =>
+                    onClick={() => {
                       router.push({
                         pathname: `${routes.characters}/[id]`,
                         query: { id: character.id },
-                      })
-                    }
+                      });
+                      dispatch(setCharacterProfile(character));
+                    }}
                   >
                     <div className="relative">
                       <Image

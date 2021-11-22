@@ -5,16 +5,20 @@ import { GET_CHARACTER } from './services/queries';
 import { Image } from '../../elements';
 import { useRouter } from 'next/router';
 import LoadingIndicator from '@/components/elements/LoadingIndicator';
+import { useAppSelector } from '@/redux';
 
 function CharacterProfile() {
   const { query } = useRouter();
-  console.log(query);
+  const characterdetailsFromRedux = useAppSelector(
+    (state) => state.characters.characterProfile,
+  );
 
   const { data, error, loading } = useQuery<
     { character: Character },
     QueryCharacterArgs
   >(GET_CHARACTER, {
-    variables: { id: query.id as string },
+    variables: { id: (query.id ?? undefined) as string },
+    skip: !query.id,
     notifyOnNetworkStatusChange: true,
   });
 
@@ -22,7 +26,8 @@ function CharacterProfile() {
     console.log(error);
   }
 
-  const characterDetails = data?.character;
+  const characterDetails = data?.character ?? characterdetailsFromRedux;
+  console.log(data);
   const maxEpisodesToRender = 9;
   const episodeCount = data?.character.episode.length;
   const [expand, setExpand] = React.useState<boolean>(!maxEpisodesToRender);

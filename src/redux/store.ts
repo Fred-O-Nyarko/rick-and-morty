@@ -21,7 +21,7 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  favoriteCharacters: characterSlice,
+  characters: characterSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 

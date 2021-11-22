@@ -5,12 +5,14 @@ import { RootState } from './store';
 interface CharacterState {
   favoriteCharacters: Character[];
   favoriteCharactersCount: number;
+  characterProfile: Character;
 }
 
 // initial store state
 const initialState: CharacterState = {
   favoriteCharacters: [],
   favoriteCharactersCount: 0,
+  characterProfile: {} as Character,
 };
 
 export const characterSlice = createSlice({
@@ -31,17 +33,27 @@ export const characterSlice = createSlice({
         ),
       ];
     },
+
+    setCharacterProfile: (state, action) => {
+      state.characterProfile = action.payload;
+    },
   },
 });
 
 // create and export actions from character slice
-export const { addCharacter, removeCharacter } = characterSlice.actions;
+export const { addCharacter, removeCharacter, setCharacterProfile } =
+  characterSlice.actions;
 
 // selector for characters
-export const selectCharacters = (state: RootState) => state.favoriteCharacters;
+export const selectCharacters = (state: RootState) => state.characters;
 
 // selector for counting number of favorite characters added
 export const favoriteCharactersCount = (state: RootState) =>
-  state.favoriteCharacters.favoriteCharacters.length;
+  state.characters.favoriteCharacters.length;
+
+// selector for getting character passed in redux
+
+export const characterProfile = (state: RootState) =>
+  state.characters.characterProfile;
 
 export default characterSlice.reducer;
