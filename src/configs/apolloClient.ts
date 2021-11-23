@@ -29,6 +29,8 @@ export const client = new ApolloClient({
       Query: {
         fields: {
           characters: mergePagination(['filter']),
+          episodes: mergePagination(),
+          locations: mergePagination(),
         },
       },
     },
