@@ -16,7 +16,7 @@
     "@heroicons/react": "^1.0.4",
     "@reduxjs/toolkit": "^1.6.2",
     "@svgr/webpack": "^5.5.0",
-    "graphql": "^15.6.1",
+    "graphql": "^15.10.1",
     "lodash": "^4.17.21",
     "next": "latest",
     "react": "^17.0.2",
